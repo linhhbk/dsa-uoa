@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1586830250 source:e:\google drive\courses-uoa\csc11f advanced data structures and algorithms\advancedatastructurealgorithms\w1a_intersectionofcircles\main.cpp
+	<iostream>
+	<cmath>
+	<cstdlib>
+
