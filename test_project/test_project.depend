@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1586946198 source:c:\users\linhh\documents\github\advanceddatastructuresandalgorithms\test_project\main.cpp
+	<iostream>
+	<stack>
+	<list>
+	<cstdlib>
+	<fstream>
+
