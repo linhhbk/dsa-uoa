@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1586936782 source:e:\google drive\courses-uoa\csc11f advanced data structures and algorithms\advancedatastructurealgorithms\w1b_cycledetection\main.cpp
+	<iostream>
+	<stack>
+	<list>
+	<cstdlib>
+	<fstream>
+
