@@ -30,6 +30,11 @@ private:
     int* pi; // save the predecessor (parent) vertex of each vertex in the shortest paths
 };
 
+struct weightedEdge{
+    int next_vertex;
+    int weight;
+};
+
 
 int main()
 {
@@ -80,12 +85,6 @@ Graph::Graph(int nv, int s) {
     wei = new list<int>[nv];
     dis = new int[nv];
     pi = new int[nv];
-    // initialize the graph
-    for (int v = 0; v < V; v++) {
-        dis[v] = INT_MAX;
-        pi[v] = -1; // predecessor vertex = NIL
-    }
-    dis[srcVer] = 0;
 }
 
 void Graph::addEdge(int u, int v, int d) {
@@ -148,4 +147,19 @@ bool Graph::isCyclic() {
     if (isCycleDetected) {return true;} else {return false;}
 }
 
-Graph
+void Graph::Dijkstra() {
+    // initialize the graph
+    for (int v = 0; v < V; v++) {
+        dis[v] = INT_MAX;
+        pi[v] = -1; // predecessor vertex = NIL
+    }
+    dis[srcVer] = 0;
+
+    //
+    bool isDetermined[V];
+    for (int i = 0; i < V; i++){isDetermined[i] = false;}
+    for (int i = 0; i < V; i++) {
+
+    }
+
+}
