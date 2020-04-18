@@ -8,7 +8,7 @@
 #include <fstream> // file
 //#include <queue>
 #include <climits>
-
+#include <queue>
 
 using namespace std;
 
@@ -40,9 +40,9 @@ private:
 int main()
 {
 //    // import data from a txt file
-//    int numVertex = 4;
+//    int numVertex = 9;
 //    //int numEdge = 3;
-//    int srcVertex = 0;
+//    int srcVertex = 5;
 //    Graph myGraph(numVertex, srcVertex);
 //    ifstream infile("input.txt");
 //    int a, b, c;
@@ -102,80 +102,145 @@ void Graph::printGraph() {
     }
 };
 
-//bool Graph::isCyclic() {
-//    bool isCycleDetected = false;
-//    //DFS: repeat until a cycle is detected
-//    stack<int> myStack;
-//    bool isDiscovered[V];
-//    for (int i = 0; i < V; i++){isDiscovered[i] = false;}
-//    for (int iVertex = 0; iVertex < V; iVertex++) {
-//		myStack.push(iVertex);
-//		// reset all elements to zero
-//		for (int i = 0; i < V; i++){isDiscovered[i] = false;}
-//		int v; //a temporary vertex
-//		while (!myStack.empty() && !isCycleDetected) {
-//			v = myStack.top();
-//			myStack.pop();
-//			if (!isDiscovered[v]) {
-//				isDiscovered[v] = true;
-//				list<int>::iterator it;
-//				for (it = adj[v].begin(); it != adj[v].end(); ++it) {
-//					if (*it == iVertex) {
-//						isCycleDetected = true;
-//						break;
-//					} else {
-//						myStack.push(*it);
-//					}
-//				}
-//			}
-//		}
-//		if (isCycleDetected) {break;}
-//    }
+//void Graph::SSSP_Dijkstra() { // version 1
+//   int *dis; //save the shortest-path estimate from the source vertex to each vertex
+//   int *pi; // save the predecessor (parent) vertex of each vertex in the shortest paths
+//   dis = new int[V];
+//   pi = new int[V];
 //
-//    if (isCycleDetected) {return true;} else {return false;}
+//   // initialize the graph
+//   for (int v = 0; v < V; v++) {
+//       dis[v] = INT_MAX;
+//       pi[v] = -1; // predecessor vertex = NIL
+//   }
+//   dis[srcVer] = 0;
+//
+//   bool isDetermined[V];
+//   for (int i = 0; i < V; i++){isDetermined[i] = false;}
+//   int v_ref, d_ref;
+//   for (int i = 0; i < V; i++) {
+//       // find the vertex with a minimum of shortest-path estimate
+//       v_ref = 0; d_ref = INT_MAX;
+//       for (int vid = 0; vid < V; vid++) {
+//           if ((isDetermined[vid]==false) && (dis[vid]) < d_ref) {
+//               d_ref = dis[vid];
+//               v_ref = vid;
+//           }
+//       }
+//       isDetermined[v_ref] = true; // mark the vertex "v_ref" as determined with a shortest-path distance
+//
+//       // relax each edge terminating from v_ref
+//       //list<weightedEdge>::iterator it;
+//       for (it = adj[v_ref].begin(); it != adj[v_ref].end(); ++it) {
+//           if (dis[it->src_vertex] != INT_MAX) {
+//               if (dis[it->des_vertex] > dis[it->src_vertex] + it->weight) {
+//                   dis[it->des_vertex] = dis[it->src_vertex] + it->weight;
+//                   pi[it->des_vertex] = it->src_vertex; // note: it->src_vertex = v_ref
+//               }
+//           }
+//       }
+//   }
+//
+//   // print out the shortest-paths distance
+//   for (int i = 0; i < V; i++) {
+//       if (dis[i] < INT_MAX) {cout << dis[i] << endl;} else {cout << "INF\n";}
+//   }
 //}
 
-void Graph::SSSP_Dijkstra() {
-    int *dis; //save the shortest-path estimate from the source vertex to each vertex
-    int *pi; // save the predecessor (parent) vertex of each vertex in the shortest paths
-    dis = new int[V];
-    pi = new int[V];
+// void Graph::SSSP_Dijkstra() { // version 2
+//     int *dis; //save the shortest-path estimate from the source vertex to each vertex
+//     int *pi; // save the predecessor (parent) vertex of each vertex in the shortest paths
+//     dis = new int[V];
+//     pi = new int[V];
+//
+//     // initialize the graph
+//     for (int v = 0; v < V; v++) {
+//         dis[v] = INT_MAX;
+//         pi[v] = -1; // predecessor vertex = NIL
+//     }
+//     dis[srcVer] = 0;
+//
+//     list<int> listOfNotYetDeterimined;
+//     int v_ref, d_ref;
+//     for (int i = 0; i < V; i++) {listOfNotYetDeterimined.push_back(i);}
+//     list<int>::iterator it1, it2;
+//     while (!listOfNotYetDeterimined.empty()) {
+//         // find the vertex with a minimum of shortest-path estimate
+//         v_ref = listOfNotYetDeterimined.front(); d_ref = INT_MAX;
+//         for (int i = 0; i < listOfNotYetDeterimined.size(); i++){
+//             it1 = it2 = listOfNotYetDeterimined.begin();
+//             advance(it2,i);
+//             if ((dis[*it2]) < d_ref) {
+//                 d_ref = dis[*it2];
+//                 v_ref = *it2;
+//                 advance(it1, i);
+//             }
+//         }
+//
+//         //listOfNotYetDeterimined.erase(it1);
+//         listOfNotYetDeterimined.remove(v_ref);
+//
+//         // relax each edge terminating from v_ref
+//         //list<weightedEdge>::iterator it;
+//         for (it = adj[v_ref].begin(); it != adj[v_ref].end(); ++it) {
+//             if (dis[it->src_vertex] != INT_MAX) {
+//                 if (dis[it->des_vertex] > dis[it->src_vertex] + it->weight) {
+//                     dis[it->des_vertex] = dis[it->src_vertex] + it->weight;
+//                     pi[it->des_vertex] = it->src_vertex; // note: it->src_vertex = v_ref
+//                 }
+//             }
+//         }
+//     }
+//
+//     // print out the shortest-paths distance
+//     for (int i = 0; i < V; i++) {
+//         if (dis[i] < INT_MAX) {cout << dis[i] << endl;} else {cout << "INF\n";}
+//     }
+// }
 
-    // initialize the graph
-    for (int v = 0; v < V; v++) {
-        dis[v] = INT_MAX;
-        pi[v] = -1; // predecessor vertex = NIL
-    }
-    dis[srcVer] = 0;
 
-    bool isDetermined[V];
-    for (int i = 0; i < V; i++){isDetermined[i] = false;}
-    int v_ref, d_ref;
-    for (int i = 0; i < V; i++) {
-        // find the vertex with a minimum of shortest-path estimate
-        v_ref = 0; d_ref = INT_MAX;
-        for (int vid = 0; vid < V; vid++) {
-            if ((isDetermined[vid]==false) && (dis[vid])<d_ref) {
-                d_ref = dis[vid];
-                v_ref = vid;
-            }
-        }
-        isDetermined[v_ref] = true; // mark the vertex "v_ref" as determined with a shortest-path distance
+void Graph::SSSP_Dijkstra() { // version 3
+     int *dis; //save the shortest-path estimate from the source vertex to each vertex
+     int *pi; // save the predecessor (parent) vertex of each vertex in the shortest paths
+     dis = new int[V];
+     pi = new int[V];
 
-        // relax each edge terminating from v_ref
-        //list<weightedEdge>::iterator it;
-        for (it = adj[v_ref].begin(); it != adj[v_ref].end(); ++it) {
-            if (dis[it->src_vertex] != INT_MAX) {
-                if (dis[it->des_vertex] > dis[it->src_vertex] + it->weight) {
-                    dis[it->des_vertex] = dis[it->src_vertex] + it->weight;
-                    pi[it->des_vertex] = it->src_vertex; // note: it->src_vertex = v_ref
-                }
-            }
-        }
-    }
+     // initialize the graph
+     for (int v = 0; v < V; v++) {
+         dis[v] = INT_MAX;
+         pi[v] = -1; // predecessor vertex = NIL
+     }
+     dis[srcVer] = 0;
 
-    // print out the shortest-paths distance
-    for (int i = 0; i < V; i++) {
-        if (dis[i] < INT_MAX) {cout << dis[i] << endl;} else {cout << "INF\n";}
-    }
-}
+     list<int> listOfNotYetDeterimined;
+     list<int>::iterator it2;
+     int v_ref, d_ref;
+     for (int i = 0; i < V; i++) {listOfNotYetDeterimined.push_back(i);}
+     while (!listOfNotYetDeterimined.empty()) {
+         // find the vertex with a minimum of shortest-path estimate
+         v_ref = listOfNotYetDeterimined.front(); d_ref = INT_MAX;
+         for (it2 = listOfNotYetDeterimined.begin(); it2 != listOfNotYetDeterimined.end(); ++it2){
+             if ((dis[*it2]) < d_ref) {
+                 d_ref = dis[*it2];
+                 v_ref = *it2;
+             }
+         }
+         listOfNotYetDeterimined.remove(v_ref);
+
+         // relax each edge terminating from v_ref
+         //list<weightedEdge>::iterator it;
+         for (it = adj[v_ref].begin(); it != adj[v_ref].end(); ++it) {
+             if (dis[it->src_vertex] != INT_MAX) {
+                 if (dis[it->des_vertex] > dis[it->src_vertex] + it->weight) {
+                     dis[it->des_vertex] = dis[it->src_vertex] + it->weight;
+                     pi[it->des_vertex] = it->src_vertex; // note: it->src_vertex = v_ref
+                 }
+             }
+         }
+     }
+
+     // print out the shortest-paths distance
+     for (int i = 0; i < V; i++) {
+         if (dis[i] < INT_MAX) {cout << dis[i] << endl;} else {cout << "INF\n";}
+     }
+ }
