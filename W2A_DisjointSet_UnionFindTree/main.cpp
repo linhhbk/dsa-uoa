@@ -1,57 +1,120 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
-class DisjointSet{
+class DisjSet{
 public:
-    int numOfNode;
+    int numOfNode; // number of nodes
     int* parent; // parent nodes
-    DisjointSet(int x);
+    int* rankArr; //rankArr of each node
+    DisjSet(int x);
     int findSet(int node);
-    int findSet_v2(int x);
-    void printDS();
+    int findSetWithPC(int x); // findSet() operation with path compression
+    void unionByRank(int x, int y);
+    bool same(int x, int y); // check whether x and y are in the same set
 };
 
 int main()
 {
-    DisjointSet mySet(5);
-    cout << "original tree: " << endl;
-    mySet.printDS();
-    cout << "v1, the root node is " << mySet.findSet(4) << endl;
-    cout << "after v1: " << endl;
-    mySet.printDS();
-    cout << "v2, the root node is " << mySet.findSet_v2(4) << endl;
-    cout << "after v2: " << endl;
-    mySet.printDS();
+//    // import data from a txt file
+//    int n; // number of nodes
+//    int q; // number of queries
+//    int a, b, c;
+//    ifstream infile("input.txt");
+//    infile >> n >> q;
+//    cout << n << " " << q << endl;
+//    DisjSet mySet(n);
+//    char output[q]; // sample output: 0 -> skip, 1 -> return yes ("
+//    for (int i = 0; i < q; i++) {
+//        infile >> a >> b >> c;
+//        cout << a << " " <<  b << " " << c << endl;
+//        if (a == 0) { // "unite(x,y)"
+//            mySet.unionByRank(b, c);
+//            output[i] = 'n';
+//        }
+//        else if (a == 1) { // "same(x, y)"
+//            if (mySet.same(b, c)) { output[i] = '1'; }
+//            else { output[i] = '0'; }
+//        }
+//    }
+//    infile.close();
+
+    // import data from command line
+    int n; // number of nodes
+    int q; // number of queries
+    int a, b, c;
+    cin >> n >> q;
+    DisjSet mySet(n);
+    char output[q]; // sample output: 0 -> skip, 1 -> return yes ("
+    for (int i = 0; i < q; i++) {
+        cin >> a >> b >> c;
+        if (a == 0) { // "unite(x,y)"
+            mySet.unionByRank(b, c);
+            output[i] = 'n';
+        }
+        else if (a == 1) { // "same(x, y)"
+            if (mySet.same(b, c)) { output[i] = '1'; }
+            else { output[i] = '0'; }
+        }
+    }
+
+    //print out the output
+    for (int i = 0; i < q; i++) {
+        if (output[i] != 'n') { cout << output[i] << endl; }
+    }
     return 0;
 }
 
-DisjointSet::DisjointSet(int x) {
+DisjSet::DisjSet(int x) {
     numOfNode = x;
     parent = new int[numOfNode];
-    parent[0] = 0;
-    for (int i = 1; i < numOfNode; i++) {
-        parent[i] = i - 1;
-    }
-}
-
-void DisjointSet::printDS() {
+    rankArr = new int[numOfNode];
     for (int i = 0; i < numOfNode; i++) {
-        cout << parent[i] << "\n";
+        parent[i] = i;
+        rankArr[i] = 1;
     }
 }
 
-DisjointSet::findSet(int node) {
+int DisjSet::findSet(int node) {
     if (parent[node] != node) {
-        return DisjointSet::findSet(parent[node]);
+        return findSet(parent[node]);
     } else {
         return parent[node];
     }
 }
 
-DisjointSet::findSet_v2(int x) {
+int DisjSet::findSetWithPC(int x) {
     if (parent[x] !=  x) {
-        parent[x] = findSet_v2(parent[x]);
+        parent[x] = findSetWithPC(parent[x]);
     }
     return parent[x];
+}
+
+void DisjSet::unionByRank(int x, int y) {
+    int xrep = findSetWithPC(x); // representative of node x
+    int yrep = findSetWithPC(y); // representative of node y
+    if (xrep == yrep) {
+        return; // do nothing since x and y are curently in the same set
+    }
+    else if (rankArr[xrep] > rankArr[yrep]) {
+        parent[yrep] = xrep;
+    }
+    else if (rankArr[xrep] < rankArr[yrep]) {
+        parent[xrep] = yrep;
+    }
+    else {
+        // rankArr[xrep] = rankArr[yrep]
+        parent[xrep] = yrep;
+        rankArr[yrep] += 1;
+    }
+}
+
+bool DisjSet::same(int x, int y) {
+    if (findSetWithPC(x) == findSetWithPC(y)) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
