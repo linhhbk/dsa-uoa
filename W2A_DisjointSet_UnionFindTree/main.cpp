@@ -5,13 +5,12 @@ using namespace std;
 
 class DisjSet{
 public:
-    int numOfNode; // number of nodes
+    int numNode; // number of nodes
     int* parent; // parent nodes
     int* rankArr; //rankArr of each node
     DisjSet(int x);
     int findSet(int node);
-    int findSetWithPC(int x); // findSet() operation with path compression
-    void unionByRank(int x, int y);
+    int findSetWithPathCompression(int x); // findSet() operation with path compression void unionByRank(int x, int y);
     bool same(int x, int y); // check whether x and y are in the same set
 };
 
@@ -67,10 +66,10 @@ int main()
 }
 
 DisjSet::DisjSet(int x) {
-    numOfNode = x;
-    parent = new int[numOfNode];
-    rankArr = new int[numOfNode];
-    for (int i = 0; i < numOfNode; i++) {
+    numNode = x;
+    parent = new int[numNode];
+    rankArr = new int[numNode];
+    for (int i = 0; i < numNode; i++) {
         parent[i] = i;
         rankArr[i] = 1;
     }
@@ -84,16 +83,16 @@ int DisjSet::findSet(int node) {
     }
 }
 
-int DisjSet::findSetWithPC(int x) {
+int DisjSet::findSetWithPathCompression(int x) {
     if (parent[x] !=  x) {
-        parent[x] = findSetWithPC(parent[x]);
+        parent[x] = findSetWithPathCompression(parent[x]);
     }
     return parent[x];
 }
 
 void DisjSet::unionByRank(int x, int y) {
-    int xrep = findSetWithPC(x); // representative of node x
-    int yrep = findSetWithPC(y); // representative of node y
+    int xrep = findSetWithPathCompression(x); // representative of node x
+    int yrep = findSetWithPathCompression(y); // representative of node y
     if (xrep == yrep) {
         return; // do nothing since x and y are curently in the same set
     }
@@ -111,7 +110,7 @@ void DisjSet::unionByRank(int x, int y) {
 }
 
 bool DisjSet::same(int x, int y) {
-    if (findSetWithPC(x) == findSetWithPC(y)) {
+    if (findSetWithPathCompression(x) == findSetWithPathCompression(y)) {
         return true;
     }
     else {
