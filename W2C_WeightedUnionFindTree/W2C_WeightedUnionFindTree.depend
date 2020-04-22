@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1587541812 source:d:\advanceddatastructuresandalgorithms\w2c_weightedunionfindtree\main.cpp
+	<iostream>
+	<fstream>
+	<tuple>
+
