@@ -12,66 +12,67 @@ public:
     int* parent; // parent nodes
     int* rankArr; // rankArr of each node
     int* weight;
+    //
     DisjointSet(int x);
-    int findSet(int node);
     tuple<int, int> findSetWithPathCompressAndWeight(int x); // findSet() operation with path compression
     void unionByRank(int x, int y, int z);
     bool same(int x, int y); // check whether x and y are in the same set
+    //
     void printSet();
 };
 
 int main()
 {
-//    // import data from a txt file
-//    int n; // number of nodes
-//    int q; // number of queries
-//    int a, b, c, d;
-//    ifstream infile("in10.txt");
-//    infile >> n >> q;
-//    //cout << n << " " << q << endl;
-//    DisjointSet mySet(n);
-//    int output[q];
-//    int outIdx = 0;
-//    for (int i = 0; i < q; i++) {
-//        infile >> a;
-//        if (a == 0) { // "relate(x,y,z)"
-//            infile >> b >> c >> d;
-//            //cout << a << " " <<  b << " " << c << " " << d << endl;
-//            mySet.unionByRank(b, c, d);
-//            //mySet.printSet();
-//        }
-//        else if (a == 1) { // "dif(x, y)"
-//            infile >> b >> c;
-//            //cout << a << " " <<  b << " " << c << endl;
-//            if (mySet.same(b, c)) { output[outIdx] = mySet.weight[c] - mySet.weight[b]; }
-//            else { output[outIdx] = INT_MAX; }
-//            outIdx += 1;
-//            //mySet.printSet();
-//        }
-//    }
-//    infile.close();
-
-    // import data from command line
+    // import data from a txt file
     int n; // number of nodes
     int q; // number of queries
     int a, b, c, d;
-    cin >> n >> q;
+    ifstream infile("in10.txt");
+    infile >> n >> q;
+    //cout << n << " " << q << endl;
     DisjointSet mySet(n);
     int output[q];
     int outIdx = 0;
     for (int i = 0; i < q; i++) {
-        cin >> a;
+        infile >> a;
         if (a == 0) { // "relate(x,y,z)"
-            cin >> b >> c >> d;
+            infile >> b >> c >> d;
+            //cout << a << " " <<  b << " " << c << " " << d << endl;
             mySet.unionByRank(b, c, d);
+            //mySet.printSet();
         }
         else if (a == 1) { // "dif(x, y)"
-            cin >> b >> c;
+            infile >> b >> c;
+            //cout << a << " " <<  b << " " << c << endl;
             if (mySet.same(b, c)) { output[outIdx] = mySet.weight[c] - mySet.weight[b]; }
-            else { output[outIdx] = MY_INT_MAX; }
+            else { output[outIdx] = INT_MAX; }
             outIdx += 1;
+            //mySet.printSet();
         }
     }
+    infile.close();
+
+//    // import data from command line
+//    int n; // number of nodes
+//    int q; // number of queries
+//    int a, b, c, d;
+//    cin >> n >> q;
+//    DisjointSet mySet(n);
+//    int output[q];
+//    int outIdx = 0;
+//    for (int i = 0; i < q; i++) {
+//        cin >> a;
+//        if (a == 0) { // "relate(x,y,z)"
+//            cin >> b >> c >> d;
+//            mySet.unionByRank(b, c, d);
+//        }
+//        else if (a == 1) { // "dif(x, y)"
+//            cin >> b >> c;
+//            if (mySet.same(b, c)) { output[outIdx] = mySet.weight[c] - mySet.weight[b]; }
+//            else { output[outIdx] = MY_INT_MAX; }
+//            outIdx += 1;
+//        }
+//    }
 
     //print out the output
     for (int i = 0; i < outIdx; i++) {
@@ -117,23 +118,6 @@ void DisjointSet::printSet() {
     cout << endl;
 }
 
-int DisjointSet::findSet(int node) {
-    if (parent[node] != node) {
-        return findSet(parent[node]);
-    } else {
-        return parent[node];
-    }
-}
-
-//int DisjointSet::findSetWithPathCompressAndWeight(int x) {
-//    if (parent[x] !=  x) {
-//        weight[x] += weight[parent[x]]; // update weight of node x
-//        parent[x] = findSetWithPathCompressAndWeight(parent[x]);
-//    }
-//    weight[x] += weight[parent[x]]; // update weight of node x
-//    return parent[x];
-//}
-
 tuple<int, int> DisjointSet::findSetWithPathCompressAndWeight(int x) {
     if (parent[x] !=  x) {
         int xpar, xpar_wt;
@@ -147,7 +131,6 @@ tuple<int, int> DisjointSet::findSetWithPathCompressAndWeight(int x) {
         return make_tuple(parent[x], weight[x]);
     }
 }
-
 
 void DisjointSet::unionByRank(int x, int y, int z) {
     int xrep, yrep;
