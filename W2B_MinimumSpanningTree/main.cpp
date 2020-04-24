@@ -17,7 +17,7 @@ public:
     int* rankArr; //rankArr of each node
     edge* edgePointer;
     bool isAllEdgeEqual = true;
-
+    //
     Graph(int numOfNode, int numEdge);
     void addEdge(int idx, int srcVer, int desVer, int wei);
     void printGraph();
@@ -29,32 +29,22 @@ public:
     //
     void sortingEdge(int p, int r); // sort edges in ascending order of their weights, modify the ascendEdgeArr attribute
     int partitionFunc(int p, int r); // sub-procedure for quick sort function
-    int kruskal(); // minimum spanning tree using disjoint set data structure
+    //
+    int kruskal(); // return the sum of weights of the minimum spanning tree, using disjoint set data structure (Kruskal's algo.)
 };
+
+Graph getInputFromFile(string myStr); // import graph data from a txt file
+Graph getInputFromCmdLine(); // import graph data from command line
 
 int main()
 {
-//    // import data from a txt file
-//    int numVertex; // number of nodes
-//    int numEdge; // number of edges
-//    int a, b, c, wt_ref;
-//    ifstream infile("in5.txt");
-//    infile >> numVertex >> numEdge;
-//    Graph myGraph(numVertex, numEdge);
-//    myGraph.isAllEdgeEqual = true;
-//    infile >> a >> b >> c;
-//    myGraph.addEdge(0, a, b, c);
-//    wt_ref = c;
-//    for (int i = 1; i < numEdge; i++) {
-//        infile >> a >> b >> c;
-//        myGraph.addEdge(i, a, b, c);
-//        if (myGraph.isAllEdgeEqual){
-//            if (c != wt_ref) {myGraph.isAllEdgeEqual = false;}
-//        }
-//    }
-//    infile.close();
+    Graph myGraph = getInputFromFile("in6.txt");
+    //Graph myGraph = getInputFromCmdLine();
+    cout << myGraph.kruskal() << "\n";
+    return 0;
+}
 
-    // import data from command line
+Graph getInputFromCmdLine() {
     int numVertex; // number of nodes
     int numEdge; // number of edges
     int a, b, c, wt_ref;
@@ -71,12 +61,29 @@ int main()
             if (c != wt_ref) {myGraph.isAllEdgeEqual = false;}
         }
     }
+    return myGraph;
+}
 
-    // return the sum of weights of the minimum spanning tree
-    cout << myGraph.kruskal() << "\n";
-
-    return 0;
-
+Graph getInputFromFile(string fileName) {
+    int numVertex; // number of nodes
+    int numEdge; // number of edges
+    int a, b, c, wt_ref;
+    ifstream infile(fileName);
+    infile >> numVertex >> numEdge;
+    Graph myGraph(numVertex, numEdge);
+    myGraph.isAllEdgeEqual = true;
+    infile >> a >> b >> c;
+    myGraph.addEdge(0, a, b, c);
+    wt_ref = c;
+    for (int i = 1; i < numEdge; i++) {
+        infile >> a >> b >> c;
+        myGraph.addEdge(i, a, b, c);
+        if (myGraph.isAllEdgeEqual){
+            if (c != wt_ref) {myGraph.isAllEdgeEqual = false;}
+        }
+    }
+    infile.close();
+    return myGraph;
 }
 
 Graph::Graph(int numOfNode, int numEdge) {
