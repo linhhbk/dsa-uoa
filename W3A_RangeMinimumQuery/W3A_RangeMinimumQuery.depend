@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1587894574 source:d:\advanceddatastructuresandalgorithms\w3a_rangeminimumquery\main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+
