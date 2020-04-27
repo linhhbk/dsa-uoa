@@ -1,3 +1,4 @@
+// Range Minimum Query v1.0: adopting the algorithms in the lecture note
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -22,42 +23,42 @@ public:
 
 int main()
 {
-    // input from cmd window
-    SegmentTree ist;
-    int n, q;
-    cin >> n >> q;
-    ist.initRMQ(n);
-    vector<int> out;
-    int x, y, z;
-    for (int i = 0; i < q; i++) {
-        cin >> x >> y >> z;
-        if (x == 0) { // update()
-            ist.update(y, z);
-        }
-        else if (x == 1) { // findMin()
-            out.push_back(ist.findMin(y, z));
-        }
-    }
-
-//    // input from file
+//    // input from cmd window
 //    SegmentTree ist;
-//    ifstream infile("in6.txt");
 //    int n, q;
-//    infile >> n >> q;
+//    cin >> n >> q;
 //    ist.initRMQ(n);
 //    vector<int> out;
 //    int x, y, z;
 //    for (int i = 0; i < q; i++) {
-//        infile >> x >> y >> z;
+//        cin >> x >> y >> z;
 //        if (x == 0) { // update()
 //            ist.update(y, z);
-//            //ist.printTree();
 //        }
 //        else if (x == 1) { // findMin()
 //            out.push_back(ist.findMin(y, z));
-//            //ist.printTree();
 //        }
 //    }
+
+    // input from file
+    SegmentTree ist;
+    ifstream infile("in6.txt");
+    int n, q;
+    infile >> n >> q;
+    ist.initRMQ(n);
+    vector<int> out;
+    int x, y, z;
+    for (int i = 0; i < q; i++) {
+        infile >> x >> y >> z;
+        if (x == 0) { // update()
+            ist.update(y, z);
+            //ist.printTree();
+        }
+        else if (x == 1) { // findMin()
+            out.push_back(ist.findMin(y, z));
+            //ist.printTree();
+        }
+    }
 
     // output
     for (int i = 0; i < out.size(); i++) {
