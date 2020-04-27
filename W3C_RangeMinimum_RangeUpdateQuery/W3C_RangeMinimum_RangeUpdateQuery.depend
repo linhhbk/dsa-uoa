@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1588004200 source:d:\advanceddatastructuresandalgorithms\w3c_rangeminimum_rangeupdatequery\main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+
