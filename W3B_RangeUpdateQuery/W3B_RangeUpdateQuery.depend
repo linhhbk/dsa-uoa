@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1588003193 source:d:\advanceddatastructuresandalgorithms\w3b_rangeupdatequery\main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+
