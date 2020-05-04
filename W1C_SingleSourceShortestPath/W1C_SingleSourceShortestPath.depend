@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1587102694 source:c:\users\linhh\documents\github\advanceddatastructuresandalgorithms\w1c_singlesourceshortestpath\main.cpp
+1588580620 source:c:\users\linhh\documents\github\advanceddatastructuresandalgorithms\w1c_singlesourceshortestpath\main.cpp
 	<iostream>
 	<stack>
 	<list>
 	<fstream>
 	<climits>
+	<queue>
 
 1587173676 source:d:\advanceddatastructuresandalgorithms\w1c_singlesourceshortestpath\main.cpp
 	<iostream>

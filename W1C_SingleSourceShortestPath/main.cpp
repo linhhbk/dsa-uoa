@@ -39,29 +39,26 @@ private:
 
 int main()
 {
-//    // import data from a txt file
-//    int numVertex = 9;
-//    //int numEdge = 3;
-//    int srcVertex = 5;
-//    Graph myGraph(numVertex, srcVertex);
-//    ifstream infile("input.txt");
-//    int a, b, c;
-//    while (infile >> a >> b >> c){
-//        myGraph.addEdge(a, b, c);
-//    }
-//    infile.close();
-
-    //import data from command line
-    int numVertex = 0;
-    int numEdge = 0;
-    int srcVertex = 0;
-    cin >> numVertex >> numEdge >> srcVertex;
+    // import data from a txt file
+    int numVertex, numEdge, srcVertex;
+    ifstream infile("in30.txt");
+    infile >> numVertex >> numEdge >> srcVertex;
     Graph myGraph(numVertex, srcVertex);
     int a, b, c;
-    for (int i = 0; i < numEdge; i++) {
-        cin >> a >> b >> c;
+    while (infile >> a >> b >> c){
         myGraph.addEdge(a, b, c);
     }
+    infile.close();
+
+//    //import data from command line
+//    int numVertex, numEdge, srcVertex;
+//    cin >> numVertex >> numEdge >> srcVertex;
+//    Graph myGraph(numVertex, srcVertex);
+//    int a, b, c;
+//    for (int i = 0; i < numEdge; i++) {
+//        cin >> a >> b >> c;
+//        myGraph.addEdge(a, b, c);
+//    }
 
     // test : print out the graph
     // myGraph.printGraph();
