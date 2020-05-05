@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1588666077 source:d:\advanceddatastructuresandalgorithms\test_priorityqueue\main.cpp
+	<iostream>
+	<queue>
+	<bits/stdc++.h>
+	<vector>
+
