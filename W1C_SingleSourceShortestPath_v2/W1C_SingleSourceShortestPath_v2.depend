@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1588665933 source:d:\advanceddatastructuresandalgorithms\w1c_singlesourceshortestpath_v2\main.cpp
+	<iostream>
+	<stack>
+	<list>
+	<fstream>
+	<climits>
+	<queue>
+	<string>
+
