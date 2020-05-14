@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1589460258 source:d:\advanceddatastructuresandalgorithms\w4a_8queens\main.cpp
+	<iostream>
+	<vector>
+	<string>
+
