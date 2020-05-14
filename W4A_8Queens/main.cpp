@@ -43,7 +43,7 @@ void chess::putQueen(int i) {
         printBoard();
         return;
     }
-    if (isFixed[i]<N) {
+    if (isFixed[i]<N) { // the queen for i-th row is given as input
         row[i] = isFixed[i];
         col[isFixed[i]] = dpos[i+isFixed[i]] = dneg[i-isFixed[i]+N-1] = NOT_FREE;
         putQueen(i+1);
@@ -56,9 +56,7 @@ void chess::putQueen(int i) {
             }
             //put a queen at (i,j)
             row[i] = j;
-            col[j] = NOT_FREE;
-            dpos[i+j] = NOT_FREE;
-            dneg[i-j+N-1] = NOT_FREE;
+            col[j] = dpos[i+j] = dneg[i-j+N-1] = NOT_FREE;
             //try the next row
             putQueen(i+1);
             //remove the queen at (i,j) for backtracking
