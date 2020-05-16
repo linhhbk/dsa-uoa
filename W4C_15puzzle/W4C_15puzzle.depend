@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1589627488 source:d:\advanceddatastructuresandalgorithms\w4c_15puzzle\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+
