@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1589614390 source:d:\advanceddatastructuresandalgorithms\w4b_8puzzle\main.cpp
+	<iostream>
+	<fstream>
+
