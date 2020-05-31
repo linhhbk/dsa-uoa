@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1590919771 source:d:\advanceddatastructuresandalgorithms\w5a_treap\main.cpp
+	<iostream>
+	<string>
+	<fstream>
+
