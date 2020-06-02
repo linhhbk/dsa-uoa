@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1591059161 source:d:\advanceddatastructuresandalgorithms\w6a_slidingminimumelement\main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+
