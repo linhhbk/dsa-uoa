@@ -1,3 +1,5 @@
+// W6B - Range Query on a Tree
+// By m5232108
 #include <iostream>
 #include <vector>
 
@@ -9,6 +11,7 @@ struct WRTree{ // Weighted Rooted Tree
     vector<int> listOfNode; // list of nodes in order of appearance with depth-first search
     vector<int> left; // save the position of a node in the vector listOfNode
     vector<int> right; // save the position of the right-most child of a node in the vector listOfNode
+    //
     WRTree(int n); // constructor function
     void addEdge(int u, int v); // node v is a children node of node u
     void dfs(int node); // DFS: update vectors "listOfNode", "left" and "right"
@@ -18,6 +21,7 @@ struct SegmentTree{
     int n; //array size
     vector<int> tree; // store the segment tree
     vector<int> lazy; // store pending updates
+    //
     void initRMQ(int arrSize);
     void lazy_evaluate(int iNode, int sStart, int sEnd);
     int readUtil(int iNode, int sStart, int sEnd, int idx);
@@ -43,10 +47,12 @@ int main()
 
     // convert the input tree to an array
     T.dfs(0); // start from the root (node 0)
+    //T.print();
 
     // create a segment tree for the array
     SegmentTree ST; // each node saves the distance from the root to a node
     ST.initRMQ(n);
+    //ST.printTree();
 
     // process queries
     int q; // no. of queries
