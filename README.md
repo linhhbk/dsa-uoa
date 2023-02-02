@@ -1,6 +1,7 @@
 # Advancde Data Structures and Algorithms
-This repository contains my solutions to programming problems in Advanced Data Structures and Algorithms, a graduate-level course taught at the University of Aizu (UoA). The course covers advanced topics not studied in the UoA's undergraduate course [Algorithms and Data Structures]{https://u-aizu.ac.jp/course/alg1/}. Course instructor: Prof. WATANOBE Yutaka. 
+This repository contains my solutions to programming problems in the course [Advanced Data Structures and Algorithms](https://onlinejudge.u-aizu.ac.jp/) at the University of Aizu (UoA). This graduate-level course covers advanced topics not studied in the course [Algorithms and Data Structures](https://u-aizu.ac.jp/course/alg1/) for undergraduates at UoA. 
 
+Course instructor: Prof. WATANOBE Yutaka. 
 
 Topics covered:
 1. Introduction. Review of fundamental data structures and algorithms as well as theory and techniques to analyze algorithms.
