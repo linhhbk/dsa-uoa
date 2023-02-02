@@ -1,8 +1,6 @@
 # Advanced Data Structures and Algorithms
 This repository contains my solutions to programming problems in the course [Advanced Data Structures and Algorithms](http://web-ext.u-aizu.ac.jp/official/curriculum/syllabus/2022_2_E_002.html#24128) (CSC11F) at the University of Aizu (UoA). This graduate-level course covers advanced topics not studied in the course [Algorithms and Data Structures](https://u-aizu.ac.jp/course/alg1/) for undergraduates at UoA. 
 
-[test](http://web-ext.u-aizu.ac.jp/official/curriculum/syllabus/2022_2_E_002.html#CSC11F)
-
 Course instructor: Prof. WATANOBE Yutaka. 
 
 Topics covered:
